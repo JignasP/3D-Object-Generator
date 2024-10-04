@@ -6,6 +6,7 @@ bl_info = {
 
 import bpy
 import requests
+import json
 
 
 
@@ -66,9 +67,19 @@ class PrintTextOperator(bpy.types.Operator):
         # Get the user input
         user_input = context.scene.user_input_text
         print(user_input)  # Print to console
+
+        user_input=" Can you please write Blender code for me that accomplishes the following task: " + user_input + " \n. Do not respond with anything that is not Python code. Do not provide explanations"
+        
         result = chatgpt_query(user_input)
-        print(result)
-        bpy.ops.mesh.primitive_cube_add(size=2, enter_editmode=False, align='WORLD', location=(0, 0, 0))
+
+                # Extract the Blender command
+        blender_command = result['choices'][0]['message']['content']
+
+        # Print the Blender command
+        print(blender_command)
+        exec(blender_command)
+        print("Done")
+
         return {'FINISHED'}
 
 def register():
