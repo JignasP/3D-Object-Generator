@@ -3,7 +3,7 @@ import sys
 subprocess.check_call([sys.executable, '-m', 'pip', 'install','requests'])
 import requests
 def chatgpt_query(prompt):
-    api_key = "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"  # Replace with your actual OpenAI API key
+    api_key = ""  # Replace with your actual OpenAI API key
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -85,6 +85,7 @@ if 'choices' in result:
         print("No valid code found.")
 else:
     print("Error:", result)
+
 
 
 
